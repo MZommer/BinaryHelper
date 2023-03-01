@@ -10,6 +10,7 @@ class IOBase:
     _buffer: BytesIO
     _endianess: Endianess
     _endianess_sign: str
+    sizeOf: int
     
     def __init__(self, path=None, mode:str=None, encoding:str="ASCII", buffer: BytesIO=None, endianess: Endianess=Endianess.BIG) -> None:
         # Endianess
