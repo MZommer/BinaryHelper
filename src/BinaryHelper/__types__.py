@@ -24,8 +24,9 @@ long = int32
 ulong = uint32
 longlong = int64
 ulonglong = uint64
-_float = float32
 half = float16
+_float = float32
+single = float32
 double = float64
 
 ### Types utils ###
