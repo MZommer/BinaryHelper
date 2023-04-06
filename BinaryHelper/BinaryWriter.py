@@ -4,6 +4,9 @@ from .logger import logger
 
 
 class BinaryWriter(BaseIO):
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs, mode="wb")
 
     def raw(self, value: bytes):
         self.sizeOf += len(value)
