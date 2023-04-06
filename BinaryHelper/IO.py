@@ -22,7 +22,7 @@ class BaseIO:
 
         # Open syntax
         if path and mode:
-            _buffer = open(path, mode=mode, encoding=encoding)
+            self._buffer = open(path, mode=mode)
 
         # Buffer (BytesIO)
         if buffer:
