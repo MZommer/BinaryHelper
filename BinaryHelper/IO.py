@@ -19,7 +19,8 @@ class BaseIO:
         # Endianess
         self.set_endianess(endianess)
         self._endianess_sign = "<" if self._endianess == Endianess.BIG else ">"
-
+        
+        self._buffer = None
         # Open syntax
         if path and mode:
             self._buffer = open(path, mode=mode)
@@ -27,6 +28,8 @@ class BaseIO:
         # Buffer (BytesIO)
         if buffer:
             self._buffer = buffer
+        if not self._buffer:
+            raise AttributeError("Provide buffer or path for creating the buffer!")
 
     ### Endianess ###
 
@@ -52,12 +55,12 @@ class BaseIO:
     def pack_into(self, fmt: str, *args) -> None:
         return struct.pack_into(fmt, self._buffer, *args)
 
-    @staticmethod
-    def unpack(fmt: str, *args) -> bytes:
-        return struct.unpack(fmt, *args)[0]
+    def unpack(self, fmt: str, *args):
+        chunk = self.read(struct.calcsize(fmt))
+        return struct.unpack(fmt, chunk)[0] if chunk else None
 
-    def unpack_into(self, fmt: str) -> None:
-        return struct.unpack_from(fmt, self._buffer, self._buffer.tell())[0]
+    def unpack_from(self, fmt: str):
+        return struct.unpack_from(fmt, self._buffer.read(struct.calcsize(fmt)))[0]
 
     ### Flush and close ###
 
