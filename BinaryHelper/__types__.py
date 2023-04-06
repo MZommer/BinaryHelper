@@ -5,7 +5,7 @@ from numpy import (
     int32, uint32,
     int64, uint64,
     float16, float32, float64,
-    float96, float128, complex64, complex128, complex192, complex256,  # unused
+    #   float96, float128, complex64, complex128, complex192, complex256,  # unused
 )
 from .IO import Endianess
 
@@ -43,10 +43,10 @@ type_format_table = {
 }
 
 
-def get_type_format(type: dtype, default: str = "x") -> str:
+def get_type_format(datatype: dtype, default: str = "x") -> str:
     """dtype to struct format char"""
-    return type_format_table.get(type, default)
+    return type_format_table.get(datatype, default)
 
 
-def get_sizeof(type: dtype) -> int:
-    return type.itemsize
+def get_sizeof(datatype: dtype) -> int:
+    return datatype.itemsize
