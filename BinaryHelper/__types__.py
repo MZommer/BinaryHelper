@@ -39,7 +39,7 @@ type_format_table = {
     float32: "f",  # float
     float64: "d",  # double
     bool: "?",
-    Endianess.BIG: "<", Endianess.LITTLE: ">",
+    Endianess.LITTLE: "<", Endianess.BIG: ">", 
 }
 
 

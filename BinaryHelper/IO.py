@@ -18,7 +18,7 @@ class BaseIO:
                  endianess: Endianess = Endianess.BIG) -> None:
         # Endianess
         self.set_endianess(endianess)
-        self._endianess_sign = "<" if self._endianess == Endianess.BIG else ">"
+        self._endianess_sign = "<" if self._endianess == Endianess.LITTLE else ">"
         
         self._buffer = None
         # Open syntax
