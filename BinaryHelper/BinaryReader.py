@@ -1,9 +1,12 @@
 from .IO import BaseIO
-from .__types__ import *
+from . import __types__ as dtypes
 from .logger import logger
-
+import struct
 
 class BinaryReader(BaseIO):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs, mode="rb")
     def raw(self, size: int):
         return self.read(size)
 
@@ -12,18 +15,18 @@ class BinaryReader(BaseIO):
 
     def auto(self, _dtype: any):
         # TODO: add support for lists and tuples
-        return self.unpack_into(self._endianess_sign + get_type_format(type(_dtype)))
+        return self.unpack(self._endianess_sign + dtypes.get_type_format(_dtype))
 
     ### Types ###
 
     def bool(self):
-        return self.auto(bool)
+        return self.auto(dtypes.bool)
 
     def int8(self):
-        return self.auto(int8)
+        return self.auto(dtypes.int8)
 
     def uint8(self):
-        return self.auto(uint8)
+        return self.auto(dtypes.uint8)
 
     def char(self):
         return self.int8()
@@ -38,10 +41,10 @@ class BinaryReader(BaseIO):
         return self.uint8()
 
     def int16(self):
-        return self.auto(int16)
+        return self.auto(dtypes.int16)
 
     def uint16(self):
-        return self.auto(uint16)
+        return self.auto(dtypes.uint16)
 
     def short(self):
         return self.int16()
@@ -50,10 +53,10 @@ class BinaryReader(BaseIO):
         return self.uint16()
 
     def int32(self):
-        return self.auto(int32)
+        return self.auto(dtypes.int32)
 
     def uint32(self):
-        return self.auto(uint32)
+        return self.auto(dtypes.uint32)
 
     def int(self):
         return self.int32()
@@ -68,10 +71,10 @@ class BinaryReader(BaseIO):
         return self.uint32()
 
     def int64(self):
-        return self.auto(int64)
+        return self.auto(dtypes.int64)
 
     def uint64(self):
-        return self.auto(uint64)
+        return self.auto(dtypes.uint64)
 
     def longlong(self):
         return self.int64()
@@ -80,13 +83,13 @@ class BinaryReader(BaseIO):
         return self.uint64()
 
     def float16(self):
-        return self.auto(float16)
+        return self.auto(dtypes.float16)
 
     def half(self):
         return self.float16()
 
     def float32(self):
-        return self.auto(float32)
+        return self.auto(dtypes.float32)
 
     def float(self):
         return self.float32()
@@ -95,7 +98,7 @@ class BinaryReader(BaseIO):
         return self.float32()
 
     def float64(self):
-        return self.auto(float64)
+        return self.auto(dtypes.float64)
 
     def double(self):
         return self.float64()
