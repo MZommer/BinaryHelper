@@ -15,7 +15,8 @@ class BinaryReader(BaseIO):
 
     def auto(self, _dtype: any):
         # TODO: add support for lists and tuples
-        return self.unpack(self._endianess_sign + dtypes.get_type_format(_dtype))
+        value = self.unpack(self._endianess_sign + dtypes.get_type_format(_dtype))
+        return value if value else _dtype()
 
     ### Types ###
 
