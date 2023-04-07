@@ -64,13 +64,13 @@ class BaseIO:
 
     ### Flush and close ###
 
-    def close(self, exc_type, exc_val, exc_tb) -> None:
+    def close(self, *args) -> None:
         """
         Close the file.
         A closed file cannot be used for further I/O operations.  close() may be
         called more than once without error.
         """
-        self._buffer.close(exc_type, exc_val, exc_tb)
+        self._buffer.close(*args)
 
     def flush(self) -> None:
         """Flush the write buffers of the stream if applicable. This does nothing for read-only and non-blocking streams."""
