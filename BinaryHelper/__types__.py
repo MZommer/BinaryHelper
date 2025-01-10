@@ -49,4 +49,8 @@ def get_type_format(datatype: dtype, default: str = "x") -> str:
 
 
 def get_sizeof(datatype: dtype) -> int:
-    return datatype.itemsize
+    if datatype.__dict__.get("itemsize"):
+        return datatype.itemsize
+    
+    if datatype is bool:
+        return 1
