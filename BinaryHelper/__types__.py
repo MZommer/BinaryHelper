@@ -49,8 +49,7 @@ def get_type_format(datatype: dtype, default: str = "x") -> str:
 
 
 def get_sizeof(datatype: dtype) -> int:
-    if datatype.__dict__.get("itemsize"):
-        return datatype.itemsize
+    if isinstance(datatype, bool):
+        return 1  # edge case
     
-    if datatype is bool:
-        return 1
+    return datatype.itemsize
