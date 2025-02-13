@@ -52,4 +52,7 @@ def get_sizeof(datatype: dtype) -> int:
     if isinstance(datatype, bool):
         return 1  # edge case
     
+    if isinstance(datatype, type):
+        datatype = datatype()
+    
     return datatype.itemsize
